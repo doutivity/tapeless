@@ -1,0 +1,100 @@
+/* Токени: кольори світлої й темної теми, шрифти, радіуси, ширини. Компоненти беруть кольори
+   лише звідси — нових літеральних кольорів у компонентах немає. «-soft» — тло плашок стану. */
+:root {
+  color-scheme: light;
+  --bg: #eef3f8;
+  --surface: #ffffff;
+  --soft: #eef3f8;
+  --fg: #1b2025;
+  --muted: #5d6874;
+  --line: #e1e5e9;
+  --accent: #0f766e;
+  --tg: #2a8bd8;
+  --tg-fg: #ffffff;
+  --tg-soft: #dcefff;
+  --ok: #0f766e;
+  --ok-soft: #e1f1ef;
+  --warn: #976300;
+  --warn-soft: #f6eddb;
+  --bad: #c0392b;
+  --bad-soft: #f8e4e1;
+  --bad-fg: #ffffff;
+  /* стрічка «тест-драйв» навколо службового блоку прев'ю */
+  --tape-yellow: #f5c400;
+  --tape-black: #1f1f1f;
+  --shadow: 0 1px 2px rgb(20 40 70 / 6%), 0 12px 32px rgb(20 40 70 / 8%);
+  --shadow-sm: 0 1px 2px rgb(20 40 70 / 7%);
+  /* плитки каналів доставки в адмінці (білий значок на кольорі; однакові в обох темах) */
+  --ch-telegram: #2a8bd8;
+  --ch-email: #64748b;
+  --ch-web-push: #d97706;
+  --ch-viber: #7360f2;
+  --ch-whatsapp: #1fa855;
+  --ch-discord: #5865f2;
+  --ch-slack: #611f69;
+  --ch-sms: #0f766e;
+  --ch-fg: #ffffff;
+  /* плитки-монограми сайтів призначення в адмінці (той самий білий текст) */
+  --site-linkedin: #0a66c2;
+  --site-facebook: #1877f2;
+  --site-mono-dark: #1b2025;
+  --site-bluesky: #1185fe;
+  --site-instagram: #d62976;
+  --site-reddit: #e03d00;
+  --site-youtube: #d61f1f;
+  --site-twitch: #9146ff;
+  --site-neutral: #3d4650;
+  /* іконки категорій бренд-списку в адмінці */
+  --brand-bank: #0f766e;
+  --brand-charity: #c0392b;
+  /* лише розробка: позначка блоків тестових даних і смужка DEV (галерея dev-only-mark-gallery.html) */
+  --dev: #7c3aed;
+  --dev-soft: #f1eafe;
+  --dev-fg: #ffffff;
+  /* смужка STAGING на кожній сторінці тестового сервера (`env::staging_strip`) */
+  --staging: #976300;
+  --staging-fg: #ffffff;
+  --radius-card: 22px;
+  --radius-box: 16px;
+  --radius-field: 12px;
+  --radius-pill: 999px;
+  --font: "Onest", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --page: 560px;
+  --page-wide: 780px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #0c1218;
+    --surface: #161a1d;
+    --soft: #0f1519;
+    --fg: #e5e9ec;
+    --muted: #98a3ad;
+    --line: #252b30;
+    --accent: #2dd4bf;
+    /* та сама синя, що й у світлій: білий текст на ній читається (#4ea4f0 з білим — ні) */
+    --tg: #2a8bd8;
+    --tg-fg: #ffffff;
+    --tg-soft: #1f3a55;
+    --ok: #2dd4bf;
+    --ok-soft: #12302c;
+    --warn: #e6b450;
+    --warn-soft: #342a14;
+    --bad: #f07167;
+    --bad-soft: #3a1c1a;
+    --bad-fg: #2a0d0b;
+    --tape-yellow: #d9ad00;
+    --tape-black: #111111;
+    /* чорна плитка X / Threads губиться на темній поверхні */
+    --site-mono-dark: #3a434c;
+    --dev: #a78bfa;
+    --dev-soft: #241b3a;
+    --dev-fg: #120b24;
+    --staging: #e0a84a;
+    --staging-fg: #261a00;
+    --shadow: 0 0 0 1px var(--line);
+    --shadow-sm: 0 0 0 1px var(--line);
+  }
+}

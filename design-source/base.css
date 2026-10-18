@@ -1,0 +1,89 @@
+/* Основа: скидання, типографіка, каркас сторінки (шапка, вміст, підвал) з base.html. */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+a { color: var(--accent); text-underline-offset: 2px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+h1, h2, h3 { margin: 0; line-height: 1.2; text-wrap: balance; }
+h1 { font-size: 1.9rem; font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: 1.2rem; font-weight: 700; }
+h3 { font-size: 1.05rem; font-weight: 700; }
+p { margin: 0; }
+ul, ol { margin: 0; padding-left: 1.25rem; }
+img, svg { max-width: 100%; }
+strong { font-weight: 700; }
+
+code {
+  font-family: var(--mono);
+  font-size: 0.9em;
+  background: var(--soft);
+  padding: 0.1em 0.35em;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+/* ─── Каркас ─── */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: calc(var(--page-wide) + 32px);
+  margin: 0 auto;
+  padding: 16px;
+}
+.logo { display: inline-flex; align-items: center; gap: 8px; color: var(--fg); font-weight: 700; font-size: 1.05rem; text-decoration: none; }
+/* знак «соняшник» (crate::brand): плитка — акцент теми, насінини — колір картки */
+.logo-mark { width: 26px; height: 26px; flex: none; }
+.logo-mark rect { fill: var(--accent); }
+.logo-mark circle { fill: var(--surface); }
+.header-nav { display: flex; align-items: center; gap: 16px; }
+.header-link { color: var(--muted); font-size: 0.92rem; text-decoration: none; }
+.header-link:hover { color: var(--fg); }
+
+.page {
+  flex: 1;
+  width: 100%;
+  max-width: calc(var(--page) + 32px);
+  margin: 0 auto;
+  padding: 8px 16px 40px;
+  display: grid;
+  gap: 16px;
+  align-content: start;
+}
+.page.wide { max-width: calc(var(--page-wide) + 32px); }
+
+.site-footer {
+  display: grid;
+  gap: 20px;
+  width: 100%;
+  max-width: calc(var(--page-wide) + 32px);
+  margin: 0 auto;
+  padding: 24px 16px 28px;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+.footer-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px 24px; }
+.footer-col { display: grid; align-content: start; gap: 8px; }
+.footer-title { margin: 0; color: var(--fg); font-weight: 600; font-size: 0.86rem; }
+.site-footer small { text-align: center; }
+.site-footer a { color: var(--muted); }
