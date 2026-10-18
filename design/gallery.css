@@ -1,0 +1,128 @@
+/* Спільні стилі макетів-галерей Tapeless. Без збірки; стиль Poklych «М'яка Тиша».
+   Токени тем задано на самій рамці (data-theme), щоб світла й темна показувались разом. */
+@import url("../design-source/fonts.css");
+
+.fr[data-theme="light"] {
+  color-scheme: light;
+  --bg: #eef3f8; --surface: #ffffff; --soft: #eef3f8; --fg: #1b2025; --muted: #5d6874; --line: #e1e5e9;
+  --accent: #0f766e; --tg: #2a8bd8; --tg-fg: #ffffff; --tg-soft: #dcefff;
+  --ok: #0f766e; --ok-soft: #e1f1ef; --warn: #976300; --warn-soft: #f6eddb; --bad: #c0392b; --bad-soft: #f8e4e1;
+  --tape-yellow: #f5c400; --tape-black: #1f1f1f;
+  --shadow: 0 1px 2px rgb(20 40 70 / 6%), 0 12px 32px rgb(20 40 70 / 8%); --shadow-sm: 0 1px 2px rgb(20 40 70 / 7%);
+}
+.fr[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0c1218; --surface: #161a1d; --soft: #0f1519; --fg: #e5e9ec; --muted: #98a3ad; --line: #252b30;
+  --accent: #2dd4bf; --tg: #2a8bd8; --tg-fg: #ffffff; --tg-soft: #1f3a55;
+  --ok: #2dd4bf; --ok-soft: #12302c; --warn: #e6b450; --warn-soft: #342a14; --bad: #f07167; --bad-soft: #3a1c1a;
+  --tape-yellow: #d9ad00; --tape-black: #111111;
+  --shadow: 0 0 0 1px var(--line); --shadow-sm: 0 0 0 1px var(--line);
+}
+.fr {
+  --radius-card: 22px; --radius-box: 16px; --radius-field: 12px; --radius-pill: 999px;
+  --font: "Onest", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  position: relative; overflow: hidden; container-type: inline-size; container-name: fr;
+  background: var(--bg); color: var(--fg); font-family: var(--font); font-size: 16px; line-height: 1.55;
+  border-radius: 14px; box-shadow: 0 0 0 1px rgb(128 128 128 / 35%);
+}
+.fr *, .fr *::before, .fr *::after { box-sizing: border-box; }
+.fr a { color: var(--accent); text-underline-offset: 2px; }
+.fr h1, .fr h2, .fr h3, .fr p { margin: 0; line-height: 1.25; text-wrap: balance; }
+.fr h1 { font-size: 1.75rem; letter-spacing: -0.01em; } .fr h2 { font-size: 1.2rem; } .fr h3 { font-size: 1.02rem; }
+.fr p { line-height: 1.55; text-wrap: pretty; }
+.fr ul { margin: 0; padding-left: 1.2rem; }
+.fr.phone { width: 390px; } .fr.desktop { width: 1280px; zoom: 0.5; }
+
+/* — компоненти з design-source/components.css (скорочено, у межах рамки) — */
+.fr .card { display: grid; gap: 16px; min-width: 0; padding: 24px 20px; background: var(--surface); border-radius: var(--radius-card); box-shadow: var(--shadow); }
+.fr .muted { color: var(--muted); } .fr .small { font-size: .88rem; }
+.fr .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 18px; font: inherit; font-size: .95rem; font-weight: 700; line-height: 1.2; color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-pill); text-decoration: none; cursor: pointer; min-height: 44px; }
+.fr .btn-primary { color: var(--tg-fg); background: var(--tg); border-color: var(--tg); }
+.fr .btn-ghost { background: transparent; border-color: transparent; color: var(--muted); }
+.fr .btn-block { width: 100%; }
+.fr .btn svg { width: 18px; height: 18px; flex: none; }
+.fr .badge { display: inline-block; font-size: .8rem; padding: 3px 10px; border-radius: var(--radius-pill); background: var(--soft); color: var(--muted); white-space: nowrap; }
+.fr .badge-ok { background: var(--ok-soft); color: var(--ok); } .fr .badge-wait { background: var(--warn-soft); color: var(--warn); } .fr .badge-info { background: var(--tg-soft); color: var(--tg); }
+.fr .actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.fr .field { display: grid; gap: 5px; color: var(--muted); font-size: .9rem; }
+.fr .input, .fr textarea { width: 100%; padding: 10px 12px; font: inherit; font-size: 1rem; color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-field); }
+.fr textarea { resize: none; line-height: 1.5; }
+.fr .focus { outline: 2px solid var(--tg); outline-offset: 2px; }
+
+/* — каркас сторінки, шапка, підвал — */
+.fr .hdr { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 16px; max-width: 812px; margin: 0 auto; }
+.fr .logo { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 1.05rem; color: var(--fg); text-decoration: none; }
+.fr .logo svg { width: 28px; height: 28px; }
+.fr .hdr nav { display: flex; align-items: center; gap: 16px; font-size: .92rem; color: var(--muted); }
+.fr .theme-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--fg); display: grid; place-items: center; font-size: 1rem; }
+.fr .tape { height: 8px; background: repeating-linear-gradient(-45deg, var(--tape-yellow) 0 10px, var(--tape-black) 10px 20px); }
+.fr .tape-frame { padding: 6px; border-radius: 22px; background: repeating-linear-gradient(-45deg, var(--tape-yellow) 0 12px, var(--tape-black) 12px 24px); }
+.fr .tape-frame > .inner { background: var(--surface); border-radius: 16px; padding: 18px 16px; display: grid; gap: 14px; }
+.fr .pg { max-width: 592px; margin: 0 auto; padding: 8px 16px 20px; display: grid; gap: 14px; }
+.fr .pg.w { max-width: 1120px; }
+.fr .ftr { max-width: 812px; margin: 0 auto; padding: 20px 16px 24px; color: var(--muted); font-size: .84rem; display: flex; flex-wrap: wrap; gap: 6px 18px; justify-content: center; }
+.fr .ftr a { color: var(--muted); }
+
+/* — прогрес, чипи, рівні, повзунки — */
+.fr .eyebrow { color: var(--muted); font-size: .9rem; }
+.fr .grp { display: grid; gap: 8px; } .fr .grp > h3 { font-size: .85rem; color: var(--muted); font-weight: 700; letter-spacing: .02em; }
+.fr .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.fr .chip { position: relative; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 14px; font: inherit; font-size: .95rem; color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-pill); }
+.fr .chip .mk { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--line); display: grid; place-items: center; flex: none; }
+.fr .chip.on { border-color: var(--tg); background: var(--tg-soft); font-weight: 700; }
+.fr .chip.on .mk { background: var(--tg); border-color: var(--tg); color: var(--tg-fg); font-size: .72rem; line-height: 1; }
+.fr .tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.fr .tilec { display: grid; gap: 4px; justify-items: start; align-content: start; min-height: 76px; padding: 12px; font: inherit; color: var(--fg); background: var(--surface); border: 2px solid var(--line); border-radius: var(--radius-box); text-align: left; position: relative; }
+.fr .tilec .em { font-size: 1.4rem; line-height: 1; } .fr .tilec b { font-size: .95rem; } .fr .tilec small { color: var(--muted); font-size: .8rem; line-height: 1.3; }
+.fr .tilec.on { border-color: var(--tg); background: var(--tg-soft); }
+.fr .tilec.on::after { content: "✓"; position: absolute; top: 8px; right: 10px; width: 22px; height: 22px; border-radius: 50%; background: var(--tg); color: var(--tg-fg); font-size: .8rem; display: grid; place-items: center; }
+.fr .rows { display: grid; gap: 6px; }
+.fr .rowc { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 48px; padding: 8px 14px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-field); font-size: .98rem; }
+.fr .rowc .bx { width: 22px; height: 22px; border-radius: 7px; border: 2px solid var(--line); display: grid; place-items: center; font-size: .8rem; flex: none; }
+.fr .rowc.on { border-color: var(--tg); background: var(--tg-soft); font-weight: 700; }
+.fr .rowc.on .bx { background: var(--tg); border-color: var(--tg); color: var(--tg-fg); }
+.fr .seg { display: inline-grid; grid-auto-flow: column; background: var(--soft); border-radius: var(--radius-pill); padding: 3px; gap: 2px; }
+.fr .seg span { padding: 8px 14px; min-height: 40px; display: grid; place-items: center; border-radius: var(--radius-pill); font-size: .88rem; color: var(--muted); }
+.fr .seg span.on { background: var(--surface); color: var(--fg); font-weight: 700; box-shadow: var(--shadow-sm); }
+.fr .dots3 { display: inline-flex; gap: 5px; } .fr .dots3 i { width: 12px; height: 12px; border-radius: 50%; background: var(--line); } .fr .dots3 i.on { background: var(--accent); }
+.fr .lvl { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 14px; min-height: 52px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-field); }
+.fr .slider { display: grid; gap: 8px; }
+.fr .slider .lab { display: flex; justify-content: space-between; font-size: .85rem; color: var(--muted); gap: 12px; }
+.fr .trk { position: relative; height: 10px; background: var(--line); border-radius: 99px; margin: 14px 11px; }
+.fr .trk .fill { position: absolute; inset: 0 auto 0 0; border-radius: 99px; background: var(--tg); }
+.fr .trk.tp .fill { background: repeating-linear-gradient(-45deg, var(--tape-yellow) 0 8px, var(--tape-black) 8px 16px); }
+.fr .trk .th { position: absolute; top: 50%; width: 28px; height: 28px; margin: -14px 0 0 -14px; border-radius: 50%; background: var(--surface); border: 3px solid var(--tg); box-shadow: var(--shadow-sm); }
+.fr .ticks { display: flex; justify-content: space-between; font-size: .8rem; color: var(--muted); padding: 0 6px; }
+.fr .ladder { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+.fr .ladder span { min-height: 48px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: var(--radius-field); background: var(--surface); font-weight: 700; }
+.fr .ladder span.on { background: var(--tg); border-color: var(--tg); color: var(--tg-fg); }
+.fr .pbar { height: 10px; border-radius: 99px; background: var(--line); overflow: hidden; } .fr .pbar i { display: block; height: 100%; width: 40%; background: repeating-linear-gradient(-45deg, var(--tape-yellow) 0 8px, var(--tape-black) 8px 16px); }
+.fr .segbar { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; } .fr .segbar i { height: 6px; border-radius: 9px; background: var(--line); } .fr .segbar i.on { background: var(--accent); }
+.fr .dotsn { display: flex; align-items: center; } .fr .dotsn i { flex: 1; height: 2px; background: var(--line); } .fr .dotsn i.on { background: var(--ok); }
+.fr .dotsn b { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; border: 2px solid var(--line); background: var(--surface); font-size: .82rem; color: var(--muted); }
+.fr .dotsn b.done { background: var(--ok); border-color: var(--ok); color: var(--surface); } .fr .dotsn b.cur { border-color: var(--tg); color: var(--tg); }
+.fr .nav { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 16px; background: var(--bg); border-top: 1px solid var(--line); }
+.fr .nav.stick { position: sticky; bottom: 0; }
+.fr .counter { color: var(--muted); font-size: .8rem; text-align: right; }
+
+/* — адаптація: усе від ширини рамки (container query), а не вікна — */
+@container fr (min-width: 700px) {
+  .fr h1 { font-size: 2.3rem; } .fr .hdr, .fr .pg { padding-left: 24px; padding-right: 24px; }
+  .fr .tiles { grid-template-columns: repeat(4, 1fr); } .fr .card { padding: 32px 36px; }
+  .fr .two { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 24px; align-items: start; }
+  .fr .nav { justify-content: space-between; }
+}
+
+/* — оболонка самої галереї (не всередині рамок) — */
+.g-body { margin: 0; background: #e9ecef; color: #1b2025; font-family: "Onest", system-ui, sans-serif; line-height: 1.5; }
+@media (prefers-color-scheme: dark) { .g-body { background: #05080b; color: #e5e9ec; } .g-var { border-color: #252b30 !important; } .g-note { color: #98a3ad !important; } }
+.g-wrap { max-width: 1500px; margin: 0 auto; padding: 24px 20px 80px; }
+.g-wrap > h1 { margin: 0 0 6px; font-size: 1.8rem; } .g-wrap > h2 { margin: 48px 0 6px; font-size: 1.35rem; padding-top: 18px; border-top: 3px solid currentColor; }
+.g-note { color: #5d6874; margin: 0 0 14px; max-width: 80ch; }
+.g-var { margin: 22px 0 34px; padding: 0 0 6px; border-bottom: 1px dashed #b6bdc4; }
+.g-var > h3 { margin: 0 0 2px; font-size: 1.08rem; } .g-var > p { margin: 0 0 12px; max-width: 80ch; }
+.g-frames { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+.g-cap { font-size: .75rem; color: #5d6874; margin: 0 0 4px; font-family: ui-monospace, monospace; }
+.g-nav { position: sticky; top: 0; z-index: 9; background: inherit; padding: 8px 0; display: flex; gap: 14px; flex-wrap: wrap; font-size: .9rem; }
+.g-nav a { color: inherit; }
