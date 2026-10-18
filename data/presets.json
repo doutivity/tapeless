@@ -1,0 +1,70 @@
+{
+ "presets": [
+  {
+   "id": "calm-remote",
+   "label": "Спокійно й віддалено",
+   "icon": "leaf",
+   "set": {
+    "balance": 4,
+    "risk": "safe",
+    "mode": "remote",
+    "stress": "low"
+   }
+  },
+  {
+   "id": "fast-growth",
+   "label": "Швидкий ріст",
+   "icon": "bolt",
+   "set": {
+    "balance": 2,
+    "study": "any",
+    "risk": "moderate",
+    "income": {
+     "target": "високий"
+    }
+   }
+  },
+  {
+   "id": "hands-on",
+   "label": "Працювати руками",
+   "icon": "wrench",
+   "set": {
+    "workType": "physical",
+    "mode": "mixed",
+    "study": "short"
+   }
+  },
+  {
+   "id": "people-helping",
+   "label": "Бути з людьми",
+   "icon": "users",
+   "set": {
+    "team": "team",
+    "publicity": "yes",
+    "stress": "medium"
+   }
+  },
+  {
+   "id": "ai-safe",
+   "label": "Захист від ШІ",
+   "icon": "shield",
+   "set": {
+    "aiPriority": 5,
+    "publicity": "yes",
+    "study": "degree"
+   }
+  },
+  {
+   "id": "no-study-fast-income",
+   "label": "Без навчання, швидкий дохід",
+   "icon": "clock",
+   "set": {
+    "study": "none",
+    "income": {
+     "horizonMonths": 3
+    },
+    "risk": "moderate"
+   }
+  }
+ ]
+}

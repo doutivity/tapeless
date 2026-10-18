@@ -1,0 +1,28 @@
+/* Content pages: hero, prose, steps, FAQ, how-it-works. */
+.hero { display: grid; gap: 12px; padding: 12px 0 4px; }
+.hero .lead { font-size: 1.1rem; color: var(--muted); max-width: 40rem; }
+.eyebrow { justify-self: start; }
+.prose { display: grid; gap: 22px; }
+.prose section { display: grid; gap: 8px; }
+.prose article, article.prose { gap: 14px; }
+.prose h2 { margin-top: 8px; }
+.prose ul, .prose ol { display: grid; gap: 6px; }
+.steps3 { display: grid; gap: 10px; padding: 0; list-style: none; counter-reset: s; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+.steps3 li { counter-increment: s; display: grid; gap: 4px; padding: 14px 16px; background: var(--surface); border-radius: var(--radius-box); box-shadow: var(--shadow-sm); }
+.steps3 li::before { content: counter(s); display: grid; place-items: center; width: 30px; height: 30px; font-weight: 700; color: var(--tg-fg); background: var(--accent); border-radius: 50%; }
+:root[data-theme="dark"] .steps3 li::before { color: #0c1218; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .steps3 li::before { color: #0c1218; } }
+.faq { display: grid; gap: 8px; }
+.faq details { padding: 4px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-field); }
+.faq summary { min-height: 44px; padding: 10px 0; font-weight: 700; cursor: pointer; }
+.faq details p { padding-bottom: 12px; color: var(--muted); }
+.crumbs { font-size: 0.88rem; color: var(--muted); }
+.crumbs a { color: var(--muted); }
+.wizard-section { scroll-margin-top: 12px; }
+.tape-divider { height: 8px; border-radius: 4px; background: repeating-linear-gradient(-45deg, var(--tape-yellow) 0 10px, var(--tape-black) 10px 20px); }
+
+.col { max-width: var(--page-wide); }
+.lead { font-size: 1.1rem; }
+@media (max-width: 520px) { .header-link { display: none; } }
+/* reserve the wizard's space so the text below it does not jump when the script renders the form (layout shift) */
+#app { min-height: 100svh; }

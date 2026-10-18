@@ -1,0 +1,4 @@
+Contact: https://github.com/doutivity/tapeless/security/advisories/new
+Expires: 2027-10-18T23:49:09Z
+Preferred-Languages: uk, en
+Canonical: https://doutivity.github.io/tapeless/.well-known/security.txt

@@ -1,0 +1,12 @@
+{
+  "siteUrl": "https://doutivity.github.io/tapeless",
+  "basePath": "/tapeless/",
+  "name": "Tapeless",
+  "tagline": "Обери фах сам — без касети",
+  "lang": "uk",
+  "author": "doutivity",
+  "poklychUrl": "",
+  "analytics": { "measurementId": "" },
+  "consentVersion": 1,
+  "buildDate": "2026-10-19"
+}

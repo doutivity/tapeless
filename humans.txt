@@ -1,0 +1,16 @@
+/* TEAM */
+  Author: doutivity
+  Contact: https://github.com/doutivity/tapeless/issues
+  Site: https://doutivity.github.io/tapeless/
+
+/* THANKS */
+  Onest typeface: SIL Open Font License 1.1
+  Style: Poklych "Soft Silence"
+  Idea: Isaac Asimov, "Profession"
+
+/* SITE */
+  Last update: 2026-10-19
+  Language: Ukrainian (uk)
+  Standards: HTML5, CSS3, ES2022
+  Components: vanilla JS (ES modules), no frameworks, no CDN
+  Hosting: GitHub Pages

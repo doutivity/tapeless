@@ -1,0 +1,212 @@
+{
+ "groups": [
+  {
+   "id": "people",
+   "label": "Люди",
+   "cards": [
+    {
+     "id": "explaining",
+     "label": "пояснювати"
+    },
+    {
+     "id": "listening",
+     "label": "слухати"
+    },
+    {
+     "id": "negotiating",
+     "label": "домовлятись"
+    },
+    {
+     "id": "persuading",
+     "label": "переконувати"
+    },
+    {
+     "id": "calm-in-crisis",
+     "label": "зберігати спокій у кризі"
+    },
+    {
+     "id": "team-lead",
+     "label": "вести команду"
+    },
+    {
+     "id": "customer-care",
+     "label": "працювати з клієнтами"
+    }
+   ]
+  },
+  {
+   "id": "mind",
+   "label": "Розум",
+   "cards": [
+    {
+     "id": "math-skill",
+     "label": "рахувати"
+    },
+    {
+     "id": "logic",
+     "label": "логічно мислити"
+    },
+    {
+     "id": "attention",
+     "label": "бути уважним(ою) до деталей"
+    },
+    {
+     "id": "memory",
+     "label": "запам'ятовувати великі обсяги"
+    },
+    {
+     "id": "learning-fast",
+     "label": "швидко вчитись"
+    },
+    {
+     "id": "structuring",
+     "label": "розкладати хаос на структуру"
+    }
+   ]
+  },
+  {
+   "id": "words",
+   "label": "Слова",
+   "cards": [
+    {
+     "id": "writing-skill",
+     "label": "писати тексти"
+    },
+    {
+     "id": "speaking",
+     "label": "говорити перед людьми"
+    },
+    {
+     "id": "foreign-language",
+     "label": "іноземні мови"
+    },
+    {
+     "id": "humor",
+     "label": "гумор"
+    }
+   ]
+  },
+  {
+   "id": "creative",
+   "label": "Творчість",
+   "cards": [
+    {
+     "id": "drawing",
+     "label": "малювати"
+    },
+    {
+     "id": "design-sense",
+     "label": "відчуття дизайну"
+    },
+    {
+     "id": "photo-video",
+     "label": "фото й відео"
+    },
+    {
+     "id": "musical-ear",
+     "label": "слух і музика"
+    },
+    {
+     "id": "ideas",
+     "label": "генерувати ідеї"
+    }
+   ]
+  },
+  {
+   "id": "hands",
+   "label": "Руки",
+   "cards": [
+    {
+     "id": "fine-motor",
+     "label": "дрібна моторика"
+    },
+    {
+     "id": "physical-endurance",
+     "label": "витривалість"
+    },
+    {
+     "id": "tools",
+     "label": "працювати з інструментами"
+    },
+    {
+     "id": "driving-skill",
+     "label": "водіння"
+    },
+    {
+     "id": "cooking-skill",
+     "label": "готувати"
+    }
+   ]
+  },
+  {
+   "id": "tech",
+   "label": "Технології",
+   "cards": [
+    {
+     "id": "coding",
+     "label": "програмувати"
+    },
+    {
+     "id": "spreadsheets",
+     "label": "таблиці й аналітика"
+    },
+    {
+     "id": "digital-tools",
+     "label": "освоювати цифрові інструменти"
+    },
+    {
+     "id": "tech-troubleshooting",
+     "label": "знаходити причину поломки"
+    }
+   ]
+  },
+  {
+   "id": "org",
+   "label": "Організація",
+   "cards": [
+    {
+     "id": "planning",
+     "label": "планувати"
+    },
+    {
+     "id": "discipline",
+     "label": "самодисципліна"
+    },
+    {
+     "id": "multitasking",
+     "label": "вести багато справ"
+    },
+    {
+     "id": "deadlines",
+     "label": "працювати в строки"
+    },
+    {
+     "id": "budgeting",
+     "label": "вести бюджет"
+    }
+   ]
+  },
+  {
+   "id": "emotional",
+   "label": "Емоційне",
+   "cards": [
+    {
+     "id": "empathy",
+     "label": "розуміти людей"
+    },
+    {
+     "id": "resilience",
+     "label": "витримувати критику й невдачі"
+    },
+    {
+     "id": "patience",
+     "label": "терпіння"
+    },
+    {
+     "id": "self-motivation",
+     "label": "мотивувати себе"
+    }
+   ]
+  }
+ ]
+}
