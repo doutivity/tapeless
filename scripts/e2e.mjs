@@ -308,7 +308,14 @@ try {
     // wizard steps too
     await page.goto(off.url, { waitUntil: 'networkidle0' });
     await pick(page);
-    for (let i = 1; i <= 5; i++) { const o = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth); if (o > 0) overflow.push(`step${i}:+${o}`); if (i < 5) await next(page); }
+    for (let i = 1; i <= 5; i++) {
+      const o = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+      if (o > 0) overflow.push(`step${i}:+${o}`);
+      // text must stay inside its card (e.g. a long word in a narrow option)
+      const clipped = await page.evaluate(() => [...document.querySelectorAll('.opt-body, .tile-body, .chip-body, .lad span, .btn, .svc')].filter((e) => e.offsetParent && e.scrollWidth > e.clientWidth + 1).map((e) => e.textContent.trim().slice(0, 24)));
+      if (clipped.length) overflow.push(`step${i} clipped: ${clipped.join(' | ')}`);
+      if (i < 5) await next(page);
+    }
     ok(overflow.length === 0, `no horizontal scroll at ${label}px (all pages and steps)`, overflow.join(' '));
     await context.close();
   }

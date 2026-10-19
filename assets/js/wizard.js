@@ -152,18 +152,20 @@ export async function initWizard(root) {
     return h('fieldset', { class: `opts${full ? ' full-only' : ''}${wide ? ' wide' : ''}` }, h('legend', { text: legend }), hint && h('p', { class: 'small muted', text: hint }), h('div', { class: 'opts-grid' }, items));
   }
 
-  // 1..5 buttons with labelled ends (balance, AI protection).
-  function ladder({ path, legend, lo, hi, quickOk = false }) {
+  // 1..5 buttons with an explanation, labelled ends and a plain-words line that repeats the chosen value.
+  function ladder({ path, legend, help, labels, lo, hi, quickOk = false }) {
     const name = nextId('l');
+    const chosen = h('p', { class: 'ladder-chosen', 'aria-live': 'polite' });
     const inputs = [1, 2, 3, 4, 5].map((n) => {
       const input = h('input', { type: 'radio', name, value: String(n) });
-      input.addEventListener('click', () => { if (get(path) === n) { input.checked = false; set(path, 0); } else set(path, n); });
+      input.addEventListener('click', () => { if (get(path) === n) { input.checked = false; set(path, 0); } else set(path, n); paint(); });
       return input;
     });
-    reg(() => inputs.forEach((i) => { i.checked = get(path) === Number(i.value); }));
-    return h('fieldset', { class: `ladder${quickOk ? '' : ' full-only'}` }, h('legend', { text: legend }),
+    const paint = () => { const n = get(path); chosen.textContent = n ? t('s4.chosen', { n, label: labels[n].toLowerCase() }) : t('s4.chosenNone'); };
+    reg(() => { inputs.forEach((i) => { i.checked = get(path) === Number(i.value); }); paint(); });
+    return h('fieldset', { class: `ladder${quickOk ? '' : ' full-only'}` }, h('legend', { text: legend }), h('p', { class: 'small muted', text: help }),
       h('div', { class: 'ladder-row' }, inputs.map((i) => h('label', { class: 'lad' }, i, h('span', { text: i.value })))),
-      h('div', { class: 'ladder-ends' }, h('span', { text: lo }), h('span', { text: hi })));
+      h('div', { class: 'ladder-ends' }, h('span', { text: `1 · ${lo}` }), h('span', { text: `5 · ${hi}` })), chosen);
   }
 
   function unknownBlock(step) {
@@ -283,7 +285,7 @@ export async function initWizard(root) {
         textField({ path: 'person.location', label: t('s3.location'), placeholder: t('s3.locationPh'), max: 120 })),
       choice({ path: 'person.relocate', field: 'relocate', legend: t('s3.relocate'), full: true }),
       choice({ path: 'person.remote', field: 'remote', legend: t('s3.remote'), full: true }),
-      choice({ path: 'person.military', field: 'military', legend: t('s3.military'), hint: t('s3.militaryWhy'), full: true }), unknownBlock(3)];
+      choice({ path: 'person.military', field: 'military', legend: t('s3.military'), hint: t('s3.militaryWhy'), full: true, wide: true }), unknownBlock(3)];
   }
 
   function step4() {
@@ -302,7 +304,7 @@ export async function initWizard(root) {
     return [...head(t('s4.title'), t('s4.lead')),
       h('div', { class: 'presets full-only' }, h('p', { class: 'small muted', text: t('s4.presets') }), h('div', { class: 'preset-row' }, presetBtns)),
       h('p', { class: 'quick-only small muted', text: t('wizard.quickNote') }),
-      ladder({ path: 'conditions.balance', legend: t('s4.balance'), lo: t('s4.balanceLow'), hi: t('s4.balanceHigh'), quickOk: true }),
+      ladder({ path: 'conditions.balance', legend: t('s4.balance'), help: t('s4.balanceHelp'), labels: t('s4.balanceLabels'), lo: t('s4.balanceLow'), hi: t('s4.balanceHigh'), quickOk: true }),
       choice({ path: 'conditions.study', field: 'study', legend: t('s4.study'), full: true }),
       choice({ path: 'conditions.risk', field: 'risk', legend: t('s4.risk'), full: true }),
       choice({ path: 'conditions.stress', field: 'stress', legend: t('s4.stress'), full: true }),
@@ -314,7 +316,7 @@ export async function initWizard(root) {
       income,
       choice({ path: 'conditions.capital', field: 'capital', legend: t('s4.capital'), full: true }),
       choice({ path: 'conditions.blogging', field: 'blogging', legend: t('s4.blogging'), full: true }),
-      ladder({ path: 'conditions.aiPriority', legend: t('s4.aiPriority'), lo: t('s4.aiLow'), hi: t('s4.aiHigh') }),
+      ladder({ path: 'conditions.aiPriority', legend: t('s4.aiPriority'), help: t('s4.aiHelp'), labels: t('s4.aiLabels'), lo: t('s4.aiLow'), hi: t('s4.aiHigh') }),
       textField({ path: 'extra', label: t('s4.extra'), placeholder: t('s4.extraPh'), multiline: true, full: true }), unknownBlock(4)];
   }
 

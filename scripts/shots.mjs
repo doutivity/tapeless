@@ -24,11 +24,13 @@ for (const [label, width, height] of sizes) {
     await page.screenshot({ path: `${dir}/home-${label}-${theme}-full.png`, fullPage: true });
     // walk the wizard: step 1 selection, then every step
     await page.evaluate(() => document.getElementById('wizard').scrollIntoView());
-    for (const i of [0, 3]) await (await page.$$('.grp-body .tile'))[i].click();
+    await page.evaluate(() => [0, 3].forEach((i) => document.querySelectorAll('.grp-body .tile input')[i].click()));
     for (let n = 1; n <= 5; n++) {
       await page.evaluate(() => document.getElementById('wizard').scrollIntoView());
       await page.screenshot({ path: `${dir}/wizard-${label}-${theme}-step${n}.png` });
-      if (n < 5) await page.click('.wz-nav .btn-primary');
+      if (n === 2) await page.evaluate(() => document.querySelector('.skill .chip input')?.click());
+      await (await page.$('.wz-card')).screenshot({ path: `${dir}/card-${label}-${theme}-step${n}.png` });
+      if (n < 5) await page.evaluate(() => document.querySelector('.wz-nav .btn-primary').click());
     }
     await page.close();
   }
