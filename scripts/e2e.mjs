@@ -43,6 +43,7 @@ async function open(base, { width = 390, height = 844, ctx } = {}) {
     r.continue();
   });
   page.on('pageerror', (e) => log.pageErrors.push(e.message));
+  await page.evaluateOnNewDocument(() => { window.__opened = []; window.open = (...a) => { window.__opened.push(a); return null; }; });
   await context.overridePermissions(new URL(base).origin, ['clipboard-read', 'clipboard-write']);
   await page.goto(base, { waitUntil: 'networkidle0' });
   return { page, context, log, base };
@@ -133,7 +134,6 @@ try {
     await page.type('#app textarea', 'ТАЄМНИЙ_ТЕКСТ_ВІДПОВІДІ');
     await pick(page); await toResult(page);
     await page.click('#theme-toggle');
-    await page.$$eval('.svc', (a) => a[0].addEventListener('click', (e) => e.preventDefault()));
     await page.click('.svc'); await wait(150);
     await page.$$eval('.actions .btn', (bs) => bs.find((b) => b.textContent.includes('Копіювати коротку')).click()); await wait(150);
     const events = await page.evaluate(() => [...window.dataLayer].map((a) => [...a]).filter((a) => a[0] === 'event'));
@@ -248,20 +248,22 @@ try {
     await page.$eval('input[name="rm"][value="explore"]', (e) => e.click());
 
     // services: href, clipboard first, long prompts
-    const hrefs = await page.$$eval('.svc', (a) => a.map((x) => [x.textContent, x.href, x.target, x.rel]));
+    const hrefs = await page.$$eval('.svc', (a) => a.map((x) => [x.textContent, x.dataset.url, x.target, x.rel, x.getAttribute('href')]));
+    ok(hrefs.every((h) => !/[?&]q=/.test(h[4]) && h[4].length < 60), 'the prompt never sits in an href (analytics outbound-click tracking would read it)', hrefs.map((h) => h[4]).join(' '));
     ok(hrefs.length === 4 && hrefs.every((h) => h[2] === '_blank' && /noopener/.test(h[3]) && /noreferrer/.test(h[3])), 'four service links with target=_blank rel=noopener noreferrer');
     ok(hrefs[0][1].startsWith('https://claude.ai/new') && hrefs[1][1].startsWith('https://chatgpt.com/') && hrefs[2][1] === 'https://gemini.google.com/app' && hrefs[3][1].startsWith('https://www.perplexity.ai/search'), 'service URLs follow services.json');
     ok(hrefs.every((h) => !/ref=|utm_|aff/.test(h[1])), 'no referral or tracking parameters');
-    await page.$$eval('.svc', (a) => a.forEach((x) => x.addEventListener('click', (e) => e.preventDefault())));
     await page.click('.svc:nth-child(3)'); await wait(200);
+    ok(JSON.stringify((await page.evaluate(() => window.__opened)).at(-1)) === JSON.stringify(['https://gemini.google.com/app', '_blank', 'noopener,noreferrer']), 'click opens the service in a new tab via window.open (noopener)');
     const clip = await page.evaluate(() => navigator.clipboard.readText());
     ok(clip === (await page.$eval('#prompt-text', (t) => t.value)), 'clicking a service copies the full prompt first (Gemini)');
     ok((await page.$eval('.toast', (e) => e.textContent)).includes('вставте'), 'Gemini: tells the person to paste');
     const longText = 'я'.repeat(3000);
     await page.$eval('#prompt-text', (t, v) => { t.value = v; t.dispatchEvent(new Event('input')); }, longText);
-    const longHref = await page.$eval('.svc', (a) => a.href);
+    const longHref = await page.$eval('.svc', (a) => a.dataset.url);
     ok(longHref.length < 8000 && longHref.includes('claude.ai/new?q=') && !longHref.includes(encodeURIComponent(longText)), 'too-long prompt: the URL carries the short version', String(longHref.length));
     await page.click('.svc'); await wait(200);
+    ok((await page.evaluate(() => window.__opened)).at(-1)[0] === longHref, 'the URL that opens is the short-version one');
     ok((await page.evaluate(() => navigator.clipboard.readText())) === longText, 'long prompt is still copied in full');
     ok((await page.$eval('.toast', (e) => e.textContent)).includes('вставте'), 'long prompt: "full version copied, paste it" message');
     await page.$$eval('.btn', (bs) => bs.find((b) => b.textContent.includes('Копіювати коротку')).click()); await wait(150);

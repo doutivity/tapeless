@@ -50,16 +50,22 @@ export function renderResult(ctx) {
     const hint = h('small');
     const a = h('a', { class: 'svc', target: '_blank', rel: 'noopener noreferrer', href: s.url.replace(/[?&]?[a-z]+=\{q\}$/, '') }, h('span', { class: 'svc-name' }, h('b', { text: t('s5.openIn', { name: s.name }) }), hint), icon('external'));
     a._s = s; a._hint = hint;
-    a.addEventListener('click', () => {
+    // The prefilled URL (it contains the prompt) never sits in href: analytics' automatic outbound-click tracking
+    // would read it. href stays the bare service address; the click handler opens the real URL itself.
+    const open = (e) => {
+      e.preventDefault();
       const r = update(a);
       copyText(ta.value).then((ok) => say(ok ? t(r.mode === 'short' ? 's5.toastShort' : r.mode === 'full' && s.prefill !== 'unverified' ? 's5.toastFull' : 's5.toastPaste', { name: s.name }) : t('common.copyFailed')));
       track('service_open', { service: s.id });
-    });
+      window.open(r.href, '_blank', 'noopener,noreferrer');
+    };
+    a.addEventListener('click', open);
+    a.addEventListener('auxclick', (e) => { if (e.button === 1) open(e); });
     return a;
   });
   function update(a) {
     const r = resolveService(a._s, ta.value, gen ? gen.short : ta.value, maxEnc);
-    a.href = r.href;
+    a.dataset.url = r.href;
     a._hint.textContent = r.mode === 'full' ? (a._s.prefill === 'unverified' ? t('s5.hintPaste') : t('s5.hintFull')) : r.mode === 'short' ? t('s5.hintShort') : t('s5.hintPaste');
     return r;
   }

@@ -5,6 +5,7 @@
   "tagline": "Обери фах сам — без касети",
   "lang": "uk",
   "author": "doutivity",
+  "verification": { "google": "", "bing": "" },
   "poklychUrl": "https://poklych.com/",
   "analytics": { "measurementId": "G-S2Z46F6TFE" },
   "consentVersion": 1,
