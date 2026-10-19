@@ -23,7 +23,11 @@ const skip = new Set(['.git', '.idea', '.shots', '.scratch', 'node_modules', 'de
 cpSync(ROOT, tmp, { recursive: true, filter: (src) => !skip.has(src.slice(ROOT.length + 1).split('/')[0]) });
 execFileSync('node', [join(ROOT, 'scripts/pages.mjs'), '--out', tmp], { env: { ...process.env, TAPELESS_GA: GA_ID }, stdio: 'pipe' });
 
-const off = await serve(ROOT, { prefix: '/tapeless/' });
+// "analytics off" copy: the committed config may carry a real id, so force it empty for the no-analytics scenarios
+const tmpOff = mkdtempSync(join(tmpdir(), 'tapeless-off-'));
+cpSync(ROOT, tmpOff, { recursive: true, filter: (src) => !skip.has(src.slice(ROOT.length + 1).split('/')[0]) });
+execFileSync('node', [join(ROOT, 'scripts/pages.mjs'), '--out', tmpOff], { env: { ...process.env, TAPELESS_GA: '' }, stdio: 'pipe' });
+const off = await serve(tmpOff, { prefix: '/tapeless/' });
 const on = await serve(tmp, { prefix: '/tapeless/' });
 const browser = await launch();
 
@@ -55,7 +59,7 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
 try {
   // ───── 1. analytics off ─────
-  console.log('\n── Analytics off (committed config) ──');
+  console.log('\n── Analytics off (id forced empty) ──');
   {
     const { page, log, base } = await open(off.url);
     ok(log.pageErrors.length === 0, 'no JS errors on load', log.pageErrors.join('; '));
@@ -340,6 +344,7 @@ try {
   await browser.close();
   off.server.close(); on.server.close();
   rmSync(tmp, { recursive: true, force: true });
+  rmSync(tmpOff, { recursive: true, force: true });
 }
 
 const failed = results.filter((r) => !r[0]);

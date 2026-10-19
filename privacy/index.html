@@ -7,7 +7,7 @@
 <meta name="description" content="Що Tapeless робить із Вашими даними: відповіді лишаються у браузері, що саме зберігається на пристрої, як змінити вибір і стерти дані.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://doutivity.github.io/tapeless/privacy/">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-W7CFQ0LPnOafBeGAKUqZ+4EeKlBF/WFbptx61rgFpkU='; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-W7CFQ0LPnOafBeGAKUqZ+4EeKlBF/WFbptx61rgFpkU=' https://www.googletagmanager.com; style-src 'self'; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; font-src 'self'; connect-src 'self' https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com; manifest-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
 <meta name="theme-color" content="#eef3f8" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0c1218" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
@@ -28,6 +28,8 @@
 <meta name="twitter:title" content="Конфіденційність: Tapeless">
 <meta name="twitter:description" content="Що Tapeless робить із Вашими даними: відповіді лишаються у браузері, що саме зберігається на пристрої, як змінити вибір і стерти дані.">
 <meta name="twitter:image" content="https://doutivity.github.io/tapeless/assets/img/og.png">
+<meta name="tapeless:ga4" content="G-S2Z46F6TFE">
+<meta name="tapeless:consent-version" content="1">
 <script>try{var t=localStorage.getItem('tapeless:theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="preload" href="../assets/fonts/onest-400-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/onest-700-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
@@ -62,15 +64,22 @@
     <h2>Що зберігається на пристрої</h2>
     <ul>
       <li><code>tapeless:theme</code>: обрана тема, лише якщо Ви перемкнули її вручну;</li>
-      
+      <li><code>tapeless:consent</code>: Ваш вибір щодо аналітики;</li>
       <li><code>tapeless:profile</code>: Ваші відповіді, <b>лише</b> якщо Ви ввімкнули «Запам’ятати відповіді на цьому пристрої». Кнопка «Стерти все» видаляє їх.</li>
     </ul>
     <h2>Куди потрапляють дані</h2>
     <p>Коли Ви натискаєте «Відкрити в Claude / ChatGPT / Gemini / Perplexity», Ви самі переходите до стороннього сервісу, і текст промпта (або його коротка версія в посиланні) потрапляє до нього за його правилами. Тому не вписуйте в поля нічого, чим не готові ділитись із цим сервісом. Копіювання в буфер обміну відбувається лише на Вашому пристрої.</p>
     <h2>Посилання «Поділитись налаштуваннями»</h2>
     <p>Вона кладе Ваші відповіді в адресу після знака <code>#</code>. Фрагмент адреси не надсилається серверам, але той, кому Ви передасте посилання, побачить Ваші відповіді.</p>
-    <h2 id="analytics">Аналітика</h2>
-    <p>Зараз на сайті немає аналітики, cookie й запитів до сторонніх сервісів.</p>
+    <h2 id="analytics">Аналітика Google Analytics 4</h2>
+    <p>Щоб розуміти, чи доходять люди до результату, ми використовуємо Google Analytics 4 <b>лише після Вашої явної згоди</b>. Обробник даних — Google. До згоди сторінка не звертається до Google, не завантажує його скрипт і не ставить cookie.</p>
+    <ul>
+      <li><b>Що отримує GA:</b> знеособлені події (<code>wizard_start</code>, <code>wizard_step</code>, <code>wizard_complete</code>, <code>prompt_copy</code>, <code>service_open</code>, <code>theme_change</code>, <code>consent_change</code>) і cookie <code>_ga</code>, <code>_ga_*</code>.</li>
+      <li><b>Чого не отримує:</b> Ваші відповіді, текст промпта, інтереси, вік, стать, локацію, військовий облік, адресу з налаштуваннями (<code>#…</code>). Ідентифікатори користувачів не використовуються, реклама вимкнена.</li>
+      <li><b>Строк зберігання</b> у налаштуваннях ресурсу GA — 2 місяці.</li>
+      <li><b>Вибір</b> зберігається в браузері (<code>tapeless:consent</code>: значення, дата, версія тексту) і запитується знову через 12 місяців або при новій версії тексту.</li>
+    </ul>
+    <p><button type="button" class="btn" data-consent-open>Змінити вибір або відкликати згоду</button> Відкликання видаляє cookie аналітики й припиняє надсилання подій.</p>
     <h2>Контакт</h2>
     <p>Питання чи прохання щодо даних: відкрийте <a href="https://github.com/doutivity/tapeless/issues" rel="noopener">обговорення в репозиторії проєкту</a>.</p>
     <p class="small muted">Версія тексту 1 · оновлено 2026-10-19</p>
@@ -80,7 +89,7 @@
   <a href="../how-it-works/">Як це працює</a>
   <a href="../privacy/" data-privacy>Конфіденційність</a>
   <a href="../about/">Про ідею</a>
-  
+  <a href="../privacy/#analytics" data-consent-open>Налаштування аналітики</a>
   <span>Зроблено в стилі Poklych</span>
 </footer>
 <script type="module" src="../assets/js/main.js"></script>
