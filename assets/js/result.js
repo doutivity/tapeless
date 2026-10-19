@@ -52,7 +52,7 @@ export function renderResult(ctx) {
     a._s = s; a._hint = hint;
     a.addEventListener('click', () => {
       const r = update(a);
-      copyText(ta.value).then((ok) => say(ok ? t(r.mode === 'full' && s.prefill !== 'unverified' ? 's5.toastFull' : 's5.toastPaste', { name: s.name }) : t('common.copyFailed')));
+      copyText(ta.value).then((ok) => say(ok ? t(r.mode === 'short' ? 's5.toastShort' : r.mode === 'full' && s.prefill !== 'unverified' ? 's5.toastFull' : 's5.toastPaste', { name: s.name }) : t('common.copyFailed')));
       track('service_open', { service: s.id });
     });
     return a;

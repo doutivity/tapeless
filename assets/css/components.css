@@ -35,7 +35,8 @@ legend { padding: 0; margin-bottom: 8px; font-weight: 700; font-size: 0.98rem; }
 
 /* choice cards: native radios, stretched over the card so the whole area is clickable and keyboard focusable */
 .opts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; }
-.opts.wide .opts-grid { grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+.opts.wide .opts-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+.opt-body > span { min-width: 0; overflow-wrap: break-word; }
 .opt { position: relative; display: block; cursor: pointer; }
 .opt input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
 .opt-body { display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 10px 14px; background: var(--surface); border: 2px solid var(--line); border-radius: var(--radius-field); font-size: 0.95rem; }
@@ -74,3 +75,10 @@ legend { padding: 0; margin-bottom: 8px; font-weight: 700; font-size: 0.98rem; }
 .consent-row input { flex: none; width: 24px; height: 24px; margin: 2px 0 0; accent-color: var(--tg); }
 .consent-row small { display: block; color: var(--muted); }
 @media (min-width: 700px) { .consent { right: auto; width: 400px; left: 20px; bottom: 20px; } }
+.ladder { gap: 8px; }
+.ladder-chosen { min-height: 1.5em; font-weight: 700; font-size: 0.92rem; color: var(--link); }
+/* narrow screens: short options become small vertical cards so the icon, the label and the radio dot never collide */
+@media (max-width: 520px) {
+  .opts:not(.wide) .opt-body { position: relative; flex-direction: column; align-items: flex-start; gap: 4px; min-height: 78px; padding: 10px 12px; }
+  .opts:not(.wide) .opt-body::after { position: absolute; top: 10px; right: 10px; margin: 0; }
+}

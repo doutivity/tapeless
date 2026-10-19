@@ -30,6 +30,7 @@ const LABELS = {
 const LEVEL = ['', 'трохи', 'добре', 'сильно'];
 const LANG = { uk: 'українська', en: 'англійська' };
 const LANG_LEVEL = ['', 'початковий', 'середній', 'високий', 'рідна'];
+const AI_PRIORITY = ['', '1: неважливо', '2: радше неважливо', '3: помірно важливо', '4: важливо', '5: головна умова'];
 const BALANCE = ['', '1: майже все життя', '2: більше життя', '3: порівну', '4: більше роботи', '5: готовий(а) повністю працювати'];
 
 // Gendered forms follow the stated gender, otherwise stay neutral ("готовий(а)").
@@ -109,7 +110,7 @@ function gather(raw, options) {
     mode: lbl('mode', c.mode), team: lbl('team', c.team), schedule: lbl('schedule', c.schedule), workType: lbl('workType', c.workType),
     publicity: lbl('publicity', c.publicity), capital: lbl('capital', c.capital), blogging: lbl('blogging', c.blogging),
     horizon: c.income.horizonMonths ? String(c.income.horizonMonths) : '', min: clean(c.income.min, 80), target: clean(c.income.target, 80),
-    aiPriority: c.aiPriority ? String(c.aiPriority) : '',
+    aiPriority: AI_PRIORITY[c.aiPriority] || '',
   };
 
   // missing[] order = order of lines in the prompt; unknown sections are reported separately
@@ -227,7 +228,7 @@ function buildShort(d, n) {
   const cond = [
     cd.balance && `баланс ${cd.balance.split(':')[0]}/5`, cd.study && `навчання — ${cd.study}`, cd.risk && `ризик — ${cd.risk}`,
     cd.mode && `режим — ${cd.mode}`, cd.min && `дохід від ${cd.min}`, cd.blogging && `блогерство — ${cd.blogging}`,
-    cd.aiPriority && `захист від ШІ — ${cd.aiPriority}/5`, d.extra && d.extra.slice(0, 200),
+    cd.aiPriority && `захист від ШІ — ${cd.aiPriority.split(':')[0]}/5`, d.extra && d.extra.slice(0, 200),
   ].filter(Boolean).join(', ');
   const head = p.mode === 'deep_dive'
     ? `Розбери професію «${d.profession || 'яку я назву у відповідь'}» для мене.`
