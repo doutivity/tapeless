@@ -1,0 +1,7 @@
+{
+  "name": "tapeless",
+  "private": true,
+  "type": "module",
+  "description": "Static site, no dependencies. This file only marks .js as ES modules for Node-based tests and dev scripts (run them with `make test`).",
+  "scripts": { "test": "node --test tests/" }
+}

@@ -1,0 +1,434 @@
+/* Компоненти: картка, текстові допоміжні класи, бейджі, кнопки (з варіанта «Чат»: овальні,
+   головна — у кольорі месенджера), рядок команди з «копіювати», факти, плашки, форми, таблиці. */
+
+/* ─── Картка й ритм ─── */
+.card {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+  padding: 28px 24px;
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow);
+}
+.stack { display: grid; gap: 8px; min-width: 0; }
+.eyebrow { color: var(--muted); font-size: 0.9rem; }
+.muted { color: var(--muted); }
+.small { font-size: 0.88rem; }
+.pre-wrap { white-space: pre-wrap; overflow-wrap: anywhere; }
+.back { color: var(--muted); font-size: 0.92rem; text-decoration: none; }
+.back:hover { color: var(--fg); }
+/* атрибут `hidden` ховає завжди: інакше `display` компонента (`.field { display: grid }`)
+   перекриває браузерне `[hidden] { display: none }` і сховане скриптом лишається на сторінці */
+[hidden] { display: none !important; }
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+@media (max-width: 480px) {
+  .card { padding: 22px 18px; border-radius: 18px; }
+  h1 { font-size: 1.65rem; }
+}
+
+/* ─── Бейджі стану ─── */
+.badges { display: flex; flex-wrap: wrap; gap: 8px; }
+.badge {
+  font-size: 0.8rem;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--soft);
+  color: var(--muted);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.badge-ok { background: var(--ok-soft); color: var(--ok); }
+.badge-wait { background: var(--warn-soft); color: var(--warn); }
+.badge-bad { background: var(--bad-soft); color: var(--bad); }
+.badge-info { background: var(--tg-soft); color: var(--tg); }
+
+/* ─── Кнопки ─── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 18px;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--fg);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn:hover { border-color: var(--muted); }
+.btn-primary { color: var(--tg-fg); background: var(--tg); border-color: var(--tg); }
+.btn-primary:hover { border-color: var(--tg); filter: brightness(1.06); }
+.btn-danger { color: var(--bad-fg); background: var(--bad); border-color: var(--bad); }
+.btn-danger:hover { border-color: var(--bad); filter: brightness(1.06); }
+.btn-quiet-danger { color: var(--bad); background: transparent; border-color: var(--line); }
+.btn-quiet-danger:hover { border-color: var(--bad); }
+/* головна дія сторінки: на телефоні — на весь рядок (легко влучити), ширше — облягає текст */
+.btn-block { justify-self: center; padding: 14px 26px; font-size: 1rem; }
+.btn-block + .btn-note { text-align: center; }
+/* заклик автора під кнопкою підписки на `/k/` (klych_subscribe_cta), далі — службовий підпис */
+.btn-block + .subscribe-cta { text-align: center; text-wrap: pretty; }
+.subscribe-cta + .btn-note { text-align: center; }
+@media (max-width: 480px) {
+  .btn-block { justify-self: stretch; display: flex; width: 100%; }
+}
+/* стовпчик рівноцінних варіантів (способи входу): однакова ширина, по центру, не ширше 320px;
+   вміст — ліворуч, щоб іконки стояли одна під одною за будь-якої довжини назви */
+.btn-wide { display: flex; justify-self: center; justify-content: flex-start; width: 100%; max-width: 320px; padding: 13px 20px; }
+.btn svg { width: 20px; height: 20px; flex: none; }
+/* іконки дій (`web::icons`): трохи менші за іконки провайдерів, у колір тексту */
+.btn svg.icon { width: 18px; height: 18px; }
+.icon { flex: none; width: 1.1em; height: 1.1em; vertical-align: -0.18em; }
+.btn-sm svg.icon { width: 16px; height: 16px; }
+.provider { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+.provider .provider-icon { width: 16px; height: 16px; flex: none; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+/* ряд кнопок, що на телефоні переноситься, — по центру (на ширшому лишається ліворуч) */
+@media (max-width: 480px) {
+  .actions-center-narrow { justify-content: center; }
+}
+
+/* ─── Сторінки каталогу ─── */
+.pager { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 20px; }
+
+/* ─── Команда з копіюванням ─── */
+.cmd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
+  padding: 6px 6px 6px 14px;
+  background: var(--soft);
+  border-radius: 14px;
+}
+.cmd code { background: none; padding: 0; overflow-wrap: anywhere; min-width: 0; }
+.copy {
+  padding: 6px 10px;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--tg);
+  background: none;
+  border: 0;
+  border-radius: 10px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.copy:hover { background: var(--tg-soft); }
+
+/* ─── Факти «назва — значення» ─── */
+.facts { display: grid; gap: 10px; margin: 0; }
+.facts > div {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr;
+  gap: 12px;
+  align-items: baseline;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+.facts > div:last-child { padding-bottom: 0; border-bottom: 0; }
+.facts dt { color: var(--muted); font-size: 0.88rem; }
+.facts dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 480px) {
+  .facts > div { grid-template-columns: 1fr; gap: 2px; }
+}
+
+/* ─── Плашки ─── */
+.notice { padding: 12px 14px; border-radius: var(--radius-field); background: var(--ok-soft); }
+.notice-warn { background: var(--warn-soft); }
+.notice .actions { margin-top: 10px; }
+/* OG-прев'ю кличу (web::og) на огляді в кабінеті: картинка 1200×630, на всю ширину картки */
+.og-card { display: block; width: 100%; height: auto; border-radius: var(--radius-field); }
+.qr { display: block; width: 240px; max-width: 100%; height: auto; margin: 1rem 0; border-radius: var(--radius-field); image-rendering: pixelated; }
+/* службовий блок прев'ю — у рамці зі стрічки «тест-драйв»; текст лише на тлі плашки, не на смугах */
+.preview-tape {
+  padding: 6px;
+  border-radius: calc(var(--radius-field) + 6px);
+  background: repeating-linear-gradient(-45deg, var(--tape-yellow) 0 12px, var(--tape-black) 12px 24px);
+}
+/* Рамка «тест-драйв» по краях екрана (рішення 2026-10-03, варіант C без плашки): на /k/ автору
+   й команді, коли на екрані не те, що бачать читачі (`StaffStrip::framed`). Нерухома, поверх
+   сторінки й прозора для натискань; стрічка через border-image — маски з `exclude` у Safari 15 немає. */
+.test-drive-frame {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  border: 3px solid transparent;
+  border-image: repeating-linear-gradient(-45deg, var(--tape-yellow) 0 12px, var(--tape-black) 12px 24px) 3;
+}
+@media print { .test-drive-frame { display: none; } }
+/* «Нічого не збережено» (`SavedNotice::is_problem`): та сама стрічка «тест-драйв», що й навколо прев'ю (`.preview-tape`) і по
+   краях `/k/` для команди: одразу видно, що це не звичайне «готово», хоч сторінка й відкрилась. Стрічка — фон із відступом, а не
+   `border-image` (він не заокруглюється); сам текст — на заокругленій плашці з іконкою. */
+.notice-stop {
+  padding: 5px;
+  background: repeating-linear-gradient(-45deg, var(--tape-yellow) 0 12px, var(--tape-black) 12px 24px);
+  border-radius: calc(var(--radius-field) + 5px);
+}
+.notice-stop-body { display: flex; gap: 10px; align-items: flex-start; padding: 10px 14px; background: var(--warn-soft); border-radius: var(--radius-field); font-weight: 600; }
+.notice-stop-body p { margin: 0; min-width: 0; }
+.notice-stop-body svg { flex: none; width: 20px; height: 20px; margin-top: 1px; color: var(--warn); }
+.notice-bad { background: var(--bad-soft); }
+.notice-bad strong { color: var(--bad); }
+.form-errors { padding: 12px 14px; border-radius: var(--radius-field); background: var(--bad-soft); color: var(--bad); }
+.form-errors ul { display: grid; gap: 4px; }
+
+/* ─── Чекліст перед стартом ─── */
+.checklist { display: grid; gap: 6px; padding: 0; list-style: none; }
+.checklist li { padding: 8px 12px; border-radius: var(--radius-field); }
+.checklist-ok { background: var(--ok-soft); }
+.checklist-warn { background: var(--warn-soft); }
+.checklist-required { background: var(--bad-soft); color: var(--bad); }
+
+/* ─── Кроки перед стартом розсилки (вкладка «Розсилка»): три стани, а не «добре / погано» ─── */
+/* «Очікує» — чекання на команду, не помилка: нейтральний колір; червоне лише там, де діяти має автор. */
+.steps-banner { display: flex; gap: 10px; align-items: flex-start; margin: 0; padding: 12px 14px; border-radius: var(--radius-field); }
+.steps-banner svg.icon { flex: none; width: 20px; height: 20px; margin-top: 1px; }
+.steps-banner-wait { background: var(--tg-soft); }
+.steps-banner-action { background: var(--bad-soft); color: var(--bad); }
+.steps { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.steps li { display: flex; gap: 10px; align-items: flex-start; padding: 10px 12px; border-radius: var(--radius-field); }
+.steps li > svg.icon { flex: none; width: 20px; height: 20px; margin-top: 2px; }
+.steps .step-body { display: grid; gap: 2px; min-width: 0; }
+.steps .step-body p { margin: 0; }
+.steps .step-label { font-size: 0.82rem; font-weight: 700; }
+.step-done { background: var(--ok-soft); }
+.step-done > svg.icon, .step-done .step-label { color: var(--ok); }
+.step-wait { background: var(--tg-soft); }
+.step-wait > svg.icon, .step-wait .step-label { color: var(--tg); }
+.step-action { background: var(--bad-soft); }
+.step-action > svg.icon, .step-action .step-label { color: var(--bad); }
+.step-warn { background: var(--warn-soft); }
+.step-warn > svg.icon, .step-warn .step-label { color: var(--warn); }
+
+/* ─── Форми ─── */
+.form { display: grid; gap: 16px; }
+.field { display: grid; gap: 5px; color: var(--muted); font-size: 0.9rem; }
+.field small { color: var(--muted); font-size: 0.82rem; }
+input:not([type]), input[type="text"], input[type="url"], input[type="email"], input[type="datetime-local"],
+select, textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 10px 12px;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--fg);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-field);
+}
+textarea { resize: vertical; line-height: 1.5; }
+input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--tg); outline-offset: 0; border-color: var(--tg); }
+[aria-invalid="true"] { border-color: var(--bad); }
+fieldset { display: grid; gap: 10px; margin: 0; padding: 0; border: 0; min-width: 0; }
+legend { margin-bottom: 8px; padding: 0; color: var(--muted); font-size: 0.9rem; }
+.check { display: flex; align-items: flex-start; gap: 10px; color: var(--fg); font-size: 0.95rem; cursor: pointer; }
+input[type="radio"], input[type="checkbox"] { flex: none; width: 18px; height: 18px; margin: 3px 0 0; accent-color: var(--tg); }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 480px) {
+  .grid-2 { grid-template-columns: 1fr; }
+}
+
+/* ─── Таблиці, плитки, списки-посилання ─── */
+.table-wrap { overflow-x: auto; background: var(--surface); border-radius: var(--radius-box); box-shadow: var(--shadow-sm); }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+th, td { padding: 9px 12px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+tbody tr:last-child td { border-bottom: 0; }
+th { color: var(--muted); font-size: 0.8rem; font-weight: 700; }
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; }
+.tile { padding: 14px 16px; color: var(--muted); font-size: 0.9rem; background: var(--surface); border-radius: var(--radius-box); box-shadow: var(--shadow-sm); }
+.tile strong { display: block; color: var(--fg); font-size: 1.8rem; font-variant-numeric: tabular-nums; }
+.link-list { display: grid; gap: 10px; padding: 0; list-style: none; }
+.link-list a {
+  display: block;
+  padding: 14px 18px;
+  color: var(--fg);
+  font-weight: 700;
+  text-decoration: none;
+  background: var(--surface);
+  border-radius: var(--radius-box);
+  box-shadow: var(--shadow-sm);
+}
+.link-list a:hover { box-shadow: var(--shadow); }
+
+/* ─── Прев'ю повідомлення в Telegram ─── */
+/* Бульбашка бота на тлі чату й inline-кнопка під нею — як підписник побачить розсилку. */
+.tg-preview { display: grid; gap: 8px; margin: 0; padding: 16px; background: var(--tg-soft); border-radius: var(--radius-box); }
+.tg-bubble { display: grid; gap: 8px; max-width: 420px; padding: 10px 14px 12px; background: var(--surface); border-radius: var(--radius-box) var(--radius-box) var(--radius-box) 4px; box-shadow: var(--shadow-sm); overflow-wrap: anywhere; }
+.tg-bubble p { margin: 0; line-height: 1.45; }
+.tg-sender { color: var(--tg); font-size: 0.88rem; font-weight: 700; }
+.tg-link { color: var(--tg); text-decoration: underline; }
+.tg-footer { color: var(--muted); font-size: 0.85rem; }
+.tg-inline-button { max-width: 420px; padding: 9px 12px; text-align: center; font-size: 0.9rem; font-weight: 700; color: var(--tg); background: var(--surface); border-radius: var(--radius-field); box-shadow: var(--shadow-sm); }
+/* демонстрація скарги: ті самі кнопки, але натискні; клавіатура бота — стовпчиком під бульбашкою */
+.tg-keyboard { display: grid; gap: 4px; max-width: 420px; }
+.tg-keyboard .tg-inline-button { width: 100%; border: 0; font: inherit; font-size: 0.9rem; font-weight: 700; cursor: pointer; }
+button.tg-inline-button:hover { filter: brightness(0.97); }
+button.tg-inline-button:focus-visible { outline: 2px solid var(--tg); outline-offset: 2px; }
+.tg-note { padding-top: 8px; border-top: 1px solid var(--line); }
+.tg-demo-bar { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+.tg-demo-bar p { margin: 0; }
+/* службова смуга сторінки кличу: рядки «Ви — автор» і «Команда» в одній смузі */
+.staff-strip { display: grid; gap: 10px; }
+.staff-row { display: grid; gap: 6px; padding-top: 10px; border-top: 1px solid var(--line); }
+
+/* ─── Покрокова форма кличу (зріз 14, `cabinet_klych_form.html`) ─── */
+/* Без JS — кроки підряд, прев'ю праворуч (на телефоні — під формою). З JS (`.wizard-js`) —
+   один крок на екрані, кружечки кроків, на телефоні прев'ю за кнопкою «Як це побачать». */
+.page.wizard-page { max-width: 1120px; grid-template-columns: minmax(0, 1fr); }
+.wizard { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 24px; align-items: start; }
+.wizard-main { display: grid; gap: 12px; min-width: 0; }
+.wizard-form { gap: 14px; }
+.wizard-dots { display: flex; align-items: center; }
+.wizard-dots i { flex: 1; height: 2px; background: var(--line); }
+.wizard-dots i.done { background: var(--ok); }
+.wizard-dots button {
+  flex: none; width: 32px; height: 32px; padding: 0; border-radius: 50%;
+  font: inherit; font-size: 0.82rem; font-weight: 700; color: var(--muted);
+  background: var(--surface); border: 2px solid var(--line); cursor: pointer;
+}
+.wizard-dots button.done { color: var(--surface); background: var(--ok); border-color: var(--ok); }
+.wizard-dots button.current { color: var(--tg); border-color: var(--tg); }
+.wizard-dots button:disabled { cursor: default; }
+/* крок «Перевірка»: зведення групами за кроками, «✎ Змінити» — у шапці групи (варіант D) */
+.review-groups { display: grid; gap: 14px; }
+.review-group { display: grid; gap: 10px; padding: 14px 16px; background: var(--soft); border-radius: var(--radius-box); }
+.review-group header { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.review-group h3 { margin: 0; font-size: 0.95rem; }
+.review-group .facts > div { grid-template-columns: 8rem 1fr; }
+.review-edit { flex: none; padding: 5px 12px; font: inherit; font-size: 0.85rem; color: var(--accent); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-pill); cursor: pointer; }
+.review-edit:hover { border-color: var(--accent); }
+@media (max-width: 480px) {
+  .review-group { padding: 12px; }
+  .review-group .facts > div { grid-template-columns: 1fr; }
+}
+.wizard-nav { position: sticky; bottom: 0; z-index: 2; display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 0; background: var(--bg); }
+.btn-ghost { background: transparent; border-color: transparent; color: var(--muted); }
+.btn-ghost:hover { color: var(--fg); border-color: var(--line); }
+.invisible { visibility: hidden; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip-radio { position: relative; cursor: pointer; }
+.chip-radio input { position: absolute; opacity: 0; }
+.chip-radio span { display: inline-block; padding: 6px 12px; font-size: 0.9rem; color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-pill); }
+.chip-radio input:checked + span { color: var(--tg-fg); background: var(--tg); border-color: var(--tg); }
+.chip-radio input:focus-visible + span { outline: 2px solid var(--tg); outline-offset: 2px; }
+.choice-card { display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; background: var(--surface); border: 2px solid var(--line); border-radius: var(--radius-box); cursor: pointer; }
+.choice-card span { display: grid; gap: 2px; }
+.choice-card small { color: var(--muted); font-size: 0.85rem; }
+.choice-card:has(input:checked) { border-color: var(--tg); background: var(--tg-soft); }
+.wizard-preview { position: sticky; top: 12px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; min-width: 0; }
+.wizard-pv { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; min-width: 0; transition: opacity 0.2s; }
+.wizard-pv.dim { opacity: 0.45; }
+.wizard-pvh { color: var(--muted); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
+.wizard-page-mini { display: grid; gap: 7px; padding: 16px; font-size: 0.9rem; overflow-wrap: anywhere; background: var(--surface); border-radius: var(--radius-box); box-shadow: var(--shadow-sm); }
+.wizard-page-mini strong { font-size: 1.05rem; line-height: 1.25; }
+.wizard-subscribe { padding: 10px; text-align: center; font-weight: 700; color: var(--tg-fg); background: var(--tg); border-radius: var(--radius-pill); }
+.wizard-og { display: grid; align-content: center; gap: 6px; aspect-ratio: 1200 / 630; padding: 18px; color: var(--tg-fg); background: linear-gradient(135deg, var(--accent), var(--tg)); border-radius: var(--radius-field); overflow-wrap: anywhere; }
+.wizard-og strong { font-size: 1.05rem; line-height: 1.2; }
+.wizard-drawer { display: none; justify-content: space-between; width: 100%; padding: 11px 14px; font: inherit; font-weight: 700; color: var(--fg); background: var(--tg-soft); border: 0; border-radius: var(--radius-box); cursor: pointer; }
+@media (max-width: 860px) {
+  .wizard { grid-template-columns: minmax(0, 1fr); }
+  .wizard-preview { position: static; }
+  .wizard-js .wizard-preview { display: none; }
+  .wizard-js .wizard-preview.open { display: grid; }
+  .wizard-js .wizard-drawer { display: flex; }
+}
+.wizard-nav .actions { flex-wrap: nowrap; gap: 6px; }
+@media (max-width: 480px) {
+  .wizard-nav .btn { padding: 10px 12px; font-size: 0.9rem; }
+}
+
+/* ─── Лише розробка (галерея dev-only-mark-gallery.html, варіант A без плашки, 2026-10-06) ───
+   Блоки, яких у проді немає: фіолетова пунктирна рамка (плашку прибрано — рамки достатньо, а
+   плашка налазила на сусідні блоки). Не плутати з жовто-чорною стрічкою тест-драйву — та про
+   «не те, що бачать читачі». */
+.dev-only { border: 2px dashed var(--dev); box-shadow: none; }
+.btn.btn-dev { border: 2px dashed var(--dev); color: var(--dev); background: var(--surface); }
+/* смужка на кожній сторінці локального оточення (`base.html`, `env::dev_strip`) */
+.dev-strip {
+  padding: 3px 12px; text-align: center;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em;
+  color: var(--dev-fg); background: var(--dev);
+}
+@media print { .dev-strip { display: none; } }
+/* смужка на кожній сторінці тестового сервера (`base.html`, `env::staging_strip`) */
+.staging-strip {
+  padding: 3px 12px; text-align: center;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em;
+  color: var(--staging-fg); background: var(--staging);
+}
+@media print { .staging-strip { display: none; } }
+
+/* ─── Смуга стану «в архіві» на вкладках кличу (рішення 2026-10-17) ─── */
+.state-strip { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; justify-content: space-between; padding: 10px 14px; color: var(--warn); background: var(--warn-soft); border-radius: var(--radius-box); font-size: 0.88rem; }
+.state-strip p { margin: 0; }
+.state-strip strong { color: var(--fg); }
+.state-strip form { margin: 0; }
+@media (max-width: 600px) {
+  .state-strip-long { display: none; }
+}
+
+/* ─── Швидкий вибір часу старту розсилки (рішення 2026-10-17) ─── */
+.quick-times { display: grid; gap: 8px; }
+.quick-times p { margin: 0; }
+.quick-time { display: inline-grid; gap: 1px; padding: 6px 12px; font: inherit; font-size: 0.9rem; color: var(--fg); text-align: center; cursor: pointer; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-pill); }
+.quick-time small { font-size: 0.72rem; color: var(--muted); }
+.quick-time[aria-pressed="true"] { color: var(--tg-fg); background: var(--tg); border-color: var(--tg); }
+.quick-time[aria-pressed="true"] small { color: inherit; }
+.quick-time:disabled { cursor: not-allowed; opacity: 0.45; }
+.quick-time:focus-visible { outline: 2px solid var(--tg); outline-offset: 2px; }
+
+/* ─── Вкладка «Поширити»: адреса в один рядок, лічильники, готовий текст, QR поруч із кнопками (рішення 2026-10-18) ─── */
+.cmd-line code { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; overflow-wrap: normal; }
+@media (max-width: 600px) {
+  .cmd-line code { font-size: 0.78rem; }
+}
+.share-stats { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 0; font-size: 0.9rem; }
+.share-stats strong { font-size: 1.02rem; }
+.share-text { margin: 0; padding: 10px 14px; white-space: pre-line; overflow-wrap: anywhere; background: var(--soft); border-radius: var(--radius-field); font-size: 0.92rem; }
+.qr-row { display: flex; flex-wrap: wrap; gap: 14px 18px; align-items: center; }
+.qr-row .qr { width: 132px; margin: 0; }
+.qr-row .actions { flex-direction: column; align-items: flex-start; }
+
+/* ─── Огляд кличу: плитки фактів, плашка стану в заголовку картки, міні-повідомлення (рішення 2026-10-18) ─── */
+.fact-tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; align-items: start; }
+@media (min-width: 700px) {
+  .fact-tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+.fact-tile { display: grid; gap: 2px; align-content: start; min-width: 0; padding: 10px 12px; background: var(--soft); border-radius: var(--radius-field); overflow-wrap: anywhere; }
+.fact-tile strong { font-size: 0.95rem; line-height: 1.25; }
+@media (max-width: 699px) {
+  .fact-tile-wide { grid-column: 1 / -1; }
+}
+.card-head { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; justify-content: space-between; }
+.card-head h2 { margin: 0; }
+.state-chip { display: inline-block; padding: 2px 10px; font-size: 0.78rem; border-radius: var(--radius-pill); background: var(--soft); color: var(--muted); }
+.state-chip-ok { background: var(--ok-soft); color: var(--ok); }
+.state-chip-wait { background: var(--warn-soft); color: var(--warn); }
+.state-chip-bad { background: var(--bad-soft); color: var(--bad); }
+.msg-preview { display: grid; gap: 3px; justify-items: start; padding: 10px 14px; border: 1px solid var(--line); border-radius: var(--radius-field); }
+.msg-preview .msg-button { display: inline-block; padding: 4px 14px; font-size: 0.85rem; color: var(--tg-fg); background: var(--tg); border-radius: var(--radius-pill); }
+.dev-actions summary { cursor: pointer; font-weight: 700; }
+
+/* ─── Вкладка «Розсилка»: чекліст одним рядком «Усе готово», розкривне пояснення (рішення 2026-10-18) ─── */
+.ready-line { color: var(--ok); background: var(--ok-soft); border-radius: var(--radius-field); }
+.ready-line summary { display: flex; gap: 8px; align-items: center; padding: 10px 14px; cursor: pointer; font-weight: 600; list-style: none; }
+.ready-line summary::-webkit-details-marker { display: none; }
+.ready-line svg { flex: none; width: 18px; height: 18px; }
+.ready-line .steps { padding: 0 10px 10px; color: var(--fg); }
+.ready-line .steps li { background: var(--surface); }
+.tg-help summary { cursor: pointer; color: var(--tg); font-size: 0.86rem; }
+.tg-help { display: grid; gap: 6px; }
+

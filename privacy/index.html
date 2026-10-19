@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Конфіденційність: Tapeless</title>
+<meta name="description" content="Що Tapeless робить із Вашими даними: відповіді лишаються у браузері, що саме зберігається на пристрої, як змінити вибір і стерти дані.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://doutivity.github.io/tapeless/privacy/">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-W7CFQ0LPnOafBeGAKUqZ+4EeKlBF/WFbptx61rgFpkU=' https://www.googletagmanager.com; style-src 'self'; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; font-src 'self'; connect-src 'self' https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com; manifest-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta name="theme-color" content="#eef3f8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0c1218" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/img/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tapeless">
+<meta property="og:locale" content="uk_UA">
+<meta property="og:title" content="Конфіденційність: Tapeless">
+<meta property="og:description" content="Що Tapeless робить із Вашими даними: відповіді лишаються у браузері, що саме зберігається на пристрої, як змінити вибір і стерти дані.">
+<meta property="og:url" content="https://doutivity.github.io/tapeless/privacy/">
+<meta property="og:image" content="https://doutivity.github.io/tapeless/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Tapeless: Обери фах сам — без касети. Літера T зі жовто-чорної стрічки.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Конфіденційність: Tapeless">
+<meta name="twitter:description" content="Що Tapeless робить із Вашими даними: відповіді лишаються у браузері, що саме зберігається на пристрої, як змінити вибір і стерти дані.">
+<meta name="twitter:image" content="https://doutivity.github.io/tapeless/assets/img/og.png">
+<meta name="tapeless:ga4" content="G-S2Z46F6TFE">
+<meta name="tapeless:consent-version" content="1">
+<script>try{var t=localStorage.getItem('tapeless:theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="preload" href="../assets/fonts/onest-400-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/onest-700-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/components.css">
+<link rel="stylesheet" href="../assets/css/wizard.css">
+<link rel="stylesheet" href="../assets/css/pages.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Tapeless","item":"https://doutivity.github.io/tapeless/"},{"@type":"ListItem","position":2,"name":"Конфіденційність","item":"https://doutivity.github.io/tapeless/privacy/"}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#main">До основного змісту</a>
+<header class="site-header">
+  <a class="logo" href="../"><svg class="logo-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect class="mk-tile" x="2" y="2" width="44" height="44" rx="10" fill="#1f1f1f"/><rect fill="#f5c400" x="8" y="9" width="32" height="9" rx="1.5"/><rect fill="#f5c400" x="19.5" y="9" width="9" height="31" rx="1.5"/><clipPath id="lm"><rect x="8" y="9" width="32" height="9" rx="1.5"/><rect x="19.5" y="9" width="9" height="31" rx="1.5"/></clipPath><g clip-path="url(#lm)"><polygon points="-36,44 -31,44 9,4 4,4" fill="#1f1f1f"/><polygon points="-26,44 -21,44 19,4 14,4" fill="#1f1f1f"/><polygon points="-16,44 -11,44 29,4 24,4" fill="#1f1f1f"/><polygon points="-6,44 -1,44 39,4 34,4" fill="#1f1f1f"/><polygon points="4,44 9,44 49,4 44,4" fill="#1f1f1f"/><polygon points="14,44 19,44 59,4 54,4" fill="#1f1f1f"/><polygon points="24,44 29,44 69,4 64,4" fill="#1f1f1f"/><polygon points="34,44 39,44 79,4 74,4" fill="#1f1f1f"/><polygon points="44,44 49,44 89,4 84,4" fill="#1f1f1f"/></g></svg><span>Tapeless</span></a>
+  <nav class="header-nav" aria-label="Основна навігація">
+    <a class="header-link" href="../how-it-works/">Як це працює</a>
+    <a class="header-link" href="../about/">Про ідею</a>
+    <button type="button" class="theme-btn" id="theme-toggle" aria-label="Змінити тему" aria-pressed="false">
+      <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
+  </nav>
+</header>
+<div class="tape" role="presentation"></div>
+<main id="main" class="page wide">
+  <nav class="crumbs" aria-label="Хлібні крихти"><a href="../">Tapeless</a> › <span>Конфіденційність</span></nav>
+  <article class="prose">
+    <h1>Конфіденційність</h1>
+    <p class="lead muted">Коротко: відповіді лишаються у Вашому браузері.</p>
+    <h2>Що відбувається, коли Ви заповнюєте форму</h2>
+    <p>Нічого не надсилається в мережу. Майстер працює у Вашому браузері, а промпт складається на Вашому пристрої. У нас немає сервера, акаунтів і бази даних.</p>
+    <h2>Що зберігається на пристрої</h2>
+    <ul>
+      <li><code>tapeless:theme</code>: обрана тема, лише якщо Ви перемкнули її вручну;</li>
+      <li><code>tapeless:consent</code>: Ваш вибір щодо аналітики;</li>
+      <li><code>tapeless:profile</code>: Ваші відповіді, <b>лише</b> якщо Ви ввімкнули «Запам’ятати відповіді на цьому пристрої». Кнопка «Стерти все» видаляє їх.</li>
+    </ul>
+    <h2>Куди потрапляють дані</h2>
+    <p>Коли Ви натискаєте «Відкрити в Claude / ChatGPT / Gemini / Perplexity», Ви самі переходите до стороннього сервісу, і текст промпта (або його коротка версія в посиланні) потрапляє до нього за його правилами. Тому не вписуйте в поля нічого, чим не готові ділитись із цим сервісом. Копіювання в буфер обміну відбувається лише на Вашому пристрої.</p>
+    <h2>Посилання «Поділитись налаштуваннями»</h2>
+    <p>Вона кладе Ваші відповіді в адресу після знака <code>#</code>. Фрагмент адреси не надсилається серверам, але той, кому Ви передасте посилання, побачить Ваші відповіді.</p>
+    <h2 id="analytics">Аналітика Google Analytics 4</h2>
+    <p>Щоб розуміти, чи доходять люди до результату, ми використовуємо Google Analytics 4 <b>лише після Вашої явної згоди</b>. Обробник даних — Google. До згоди сторінка не звертається до Google, не завантажує його скрипт і не ставить cookie.</p>
+    <ul>
+      <li><b>Що отримує GA:</b> знеособлені події (<code>wizard_start</code>, <code>wizard_step</code>, <code>wizard_complete</code>, <code>prompt_copy</code>, <code>service_open</code>, <code>theme_change</code>, <code>consent_change</code>) і cookie <code>_ga</code>, <code>_ga_*</code>.</li>
+      <li><b>Чого не отримує:</b> Ваші відповіді, текст промпта, інтереси, вік, стать, локацію, військовий облік, адресу з налаштуваннями (<code>#…</code>). Ідентифікатори користувачів не використовуються, реклама вимкнена.</li>
+      <li><b>Строк зберігання</b> у налаштуваннях ресурсу GA — 2 місяці.</li>
+      <li><b>Вибір</b> зберігається в браузері (<code>tapeless:consent</code>: значення, дата, версія тексту) і запитується знову через 12 місяців або при новій версії тексту.</li>
+    </ul>
+    <p><button type="button" class="btn" data-consent-open>Змінити вибір або відкликати згоду</button> Відкликання видаляє cookie аналітики й припиняє надсилання подій.</p>
+    <h2>Контакт</h2>
+    <p>Питання чи прохання щодо даних: відкрийте <a href="https://github.com/doutivity/tapeless/issues" rel="noopener">обговорення в репозиторії проєкту</a>.</p>
+    <p class="small muted">Версія тексту 1 · оновлено 2026-10-19</p>
+  </article>
+</main>
+<footer class="site-footer">
+  <a href="../how-it-works/">Як це працює</a>
+  <a href="../privacy/" data-privacy>Конфіденційність</a>
+  <a href="../about/">Про ідею</a>
+  <a href="../privacy/#analytics" data-consent-open>Налаштування аналітики</a>
+  <span>Зроблено в стилі <a href="https://poklych.com/" rel="noopener">Poklych</a></span>
+</footer>
+<script type="module" src="../assets/js/main.js"></script>
+</body>
+</html>

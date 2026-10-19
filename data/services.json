@@ -1,0 +1,10 @@
+{
+  "note": "Схеми URL змінюються. verifiedAt = null означає: не перевірено на живому сервісі, тож кнопка завжди спершу копіює повний промпт і підписана «Відкрити й вставити». Перевірте вручну перед релізом і впишіть дату.",
+  "maxEncoded": 7500,
+  "services": [
+    { "id": "claude", "name": "Claude", "url": "https://claude.ai/new?q={q}", "prefill": "unverified", "maxEncoded": 7500, "verifiedAt": null },
+    { "id": "chatgpt", "name": "ChatGPT", "url": "https://chatgpt.com/?q={q}", "prefill": "unverified", "maxEncoded": 7500, "verifiedAt": null },
+    { "id": "gemini", "name": "Gemini", "url": "https://gemini.google.com/app", "prefill": "none", "maxEncoded": 0, "verifiedAt": null },
+    { "id": "perplexity", "name": "Perplexity", "url": "https://www.perplexity.ai/search?q={q}", "prefill": "unverified", "maxEncoded": 7500, "verifiedAt": null }
+  ]
+}
