@@ -75,7 +75,7 @@ function head(page, rel, { jsonld = [], noindex = false, base = rel } = {}) {
 <meta name="twitter:title" content="${esc(page.title)}">
 <meta name="twitter:description" content="${esc(page.description)}">
 <meta name="twitter:image" content="${img}">
-${GA ? `<meta name="tapeless:ga4" content="${esc(GA)}">\n<meta name="tapeless:consent-version" content="${cfg.consentVersion}">\n` : ''}<script>${THEME_JS}</script>
+${page.path === '' && cfg.verification?.google ? `<meta name="google-site-verification" content="${esc(cfg.verification.google)}">\n` : ''}${page.path === '' && cfg.verification?.bing ? `<meta name="msvalidate.01" content="${esc(cfg.verification.bing)}">\n` : ''}${GA ? `<meta name="tapeless:ga4" content="${esc(GA)}">\n<meta name="tapeless:consent-version" content="${cfg.consentVersion}">\n` : ''}<script>${THEME_JS}</script>
 <link rel="preload" href="${R('assets/fonts/onest-400-cyrillic.woff2')}" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="${R('assets/fonts/onest-700-cyrillic.woff2')}" as="font" type="font/woff2" crossorigin>
 ${['tokens', 'base', 'components', 'wizard', 'pages'].map((n) => `<link rel="stylesheet" href="${R(`assets/css/${n}.css`)}">`).join('\n')}
