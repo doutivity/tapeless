@@ -5,7 +5,7 @@
    "label": "Спокійно й віддалено",
    "icon": "leaf",
    "set": {
-    "balance": 4,
+    "balance": 2,
     "risk": "safe",
     "mode": "remote",
     "stress": "low"
@@ -16,7 +16,7 @@
    "label": "Швидкий ріст",
    "icon": "bolt",
    "set": {
-    "balance": 2,
+    "balance": 4,
     "study": "any",
     "risk": "moderate",
     "income": {
