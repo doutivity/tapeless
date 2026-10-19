@@ -37,7 +37,7 @@
 - `sitemap.xml`: `lastmod` у всіх сторінок — дата збирання (`buildDate`), бо в сайту немає історії змін по сторінках.
 - `consent_change` надсилається лише при «Прийняти»: після відкликання нічого не шлемо.
 - У GA `allow_google_signals` і персоналізація реклами вимкнені, `page_location` — без `#`.
-- Посилання «Зроблено в стилі Poklych» — звичайний текст: адреса Poklych у джерелах не вказана, а вигадувати я її не став. Вписати в `site.config.json:poklychUrl` і `make pages`.
+- Посилання «Зроблено в стилі Poklych» веде на `site.config.json:poklychUrl` (<https://poklych.com/>); якщо поле порожнє, лишається звичайний текст. Це єдиний зовнішній `<a>` у підвалі, дозволений у `check.mjs`.
 - **⚠** `security.txt` веде на GitHub Security Advisories репозиторію; якщо ця функція вимкнена, замініть контакт у `scripts/brand/build.mjs`. `humans.txt` і «Конфіденційність» ведуть на issues репозиторію.
 
 ## Перевірки

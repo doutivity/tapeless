@@ -14,7 +14,7 @@ const warn = [];
 const err = (m) => errors.push(m);
 const read = (p) => readFileSync(join(ROOT, p), 'utf8');
 const LIMIT_KB = 40;
-const EXTERNAL_ANCHORS = [/^https:\/\/github\.com\/doutivity\//];
+const EXTERNAL_ANCHORS = [/^https:\/\/github\.com\/doutivity\//, /^https:\/\/poklych\.com\//];
 
 // ---------- pages ----------
 const all = [...PAGES, NOT_FOUND];
